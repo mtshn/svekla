@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
+  All rights reserved. Use is subject to license terms.
+
+  This file is available and licensed under the following license:
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+
+  - Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+  - Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in
+    the documentation and/or other materials provided with the distribution.
+  - Neither the name of Oracle Corporation nor the names of its
+    contributors may be used to endorse or promote products derived
+    from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.web.WebView?>
+
+<VBox prefHeight="889.0" prefWidth="1343.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+      <ScrollPane prefHeight="885.0" prefWidth="1281.0">
+         <content>
+            <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="883.0" prefWidth="1331.0" tabClosingPolicy="UNAVAILABLE">
+               <tabs>
+                  <Tab text="Comparison">
+                     <content>
+                        <AnchorPane>
+                           <children>
+                              <WebView id="webview" layoutX="6.0" layoutY="432.0" prefHeight="400.0" prefWidth="629.0" />
+                              <Canvas id="canvas2" height="400.0" layoutX="642.0" layoutY="432.0" width="671.0" />
+                              <Canvas id="canvas1" height="400.0" layoutX="642.0" layoutY="34.0" width="671.0" />
+                              <Label layoutX="14.0" layoutY="14.0" prefHeight="16.0" prefWidth="558.0" text="Retention index (RI) prediction, method 1 (DB-5):" />
+                              <TextField id="accessresults" editable="false" layoutX="13.0" layoutY="32.0" prefHeight="24.0" prefWidth="601.0">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font></TextField>
+                              <Label layoutX="14.0" layoutY="56.0" prefHeight="16.0" prefWidth="346.0" text="Retention index prediction, method 2 (DB-5, WAX):" />
+                              <Label layoutX="14.0" layoutY="104.0" text="Molecular formula:" />
+                              <TextField id="sveklaresults" editable="false" layoutX="14.0" layoutY="72.0" prefHeight="24.0" prefWidth="599.0">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font></TextField>
+                              <TextField id="molecularformula" editable="false" layoutX="148.0" layoutY="99.0" prefHeight="24.0" prefWidth="467.0" />
+                              <TextField id="rinonpolar" editable="false" layoutX="14.0" layoutY="145.0" prefHeight="45.0" prefWidth="91.0">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </TextField>
+                              <Label layoutX="14.0" layoutY="124.0" text="RI, DB-5" textFill="#0a720e">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField id="devnonpolar" editable="false" layoutX="104.0" layoutY="145.0" prefHeight="45.0" prefWidth="82.0">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </TextField>
+                              <Label layoutX="104.0" layoutY="124.0" text="Deviation">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField id="ripolar" editable="false" layoutX="206.0" layoutY="144.0" prefHeight="45.0" prefWidth="91.0">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </TextField>
+                              <Label layoutX="206.0" layoutY="123.0" text="RI, WAX" textFill="#700a0a">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField id="devpolar" editable="false" layoutX="296.0" layoutY="144.0" prefHeight="45.0" prefWidth="82.0">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </TextField>
+                              <Label layoutX="296.0" layoutY="123.0" text="Deviation">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="16.0" layoutY="189.0" text="Spectral similarity" textFill="#6c0a6e">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField id="spectralsimilarity" editable="false" layoutX="13.0" layoutY="210.0" prefHeight="24.0" prefWidth="602.0" />
+                              <Button id="button" layoutX="393.0" layoutY="147.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="220.0" text="Predict spectrum" textFill="#100d97">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Button>
+                              <CheckBox id="checkboxsquareroot" layoutX="1174.0" layoutY="13.0" mnemonicParsing="false" text="Square root scale" />
+                              <CheckBox id="checkboxallpeaks" layoutX="1048.0" layoutY="13.0" mnemonicParsing="false" text="Mark all peaks" />
+                              <Button id="closespectra" layoutX="924.0" layoutY="10.0" mnemonicParsing="false" text="Close spectrum" />
+                              <Button id="buttonmsms" layoutX="11.0" layoutY="241.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="142.0" text="Spectrum ms/ms" />
+                              <CheckBox id="checkboxmsmspos" layoutX="160.0" layoutY="244.0" mnemonicParsing="false" selected="true" text="Positive" />
+                              <CheckBox id="checkboxmsmsneg" layoutX="242.0" layoutY="244.0" mnemonicParsing="false" text="Negative" />
+                              <CheckBox id="checkboxmsmsnewwin" layoutX="331.0" layoutY="244.0" mnemonicParsing="false" text="New window" />
+                              <TextArea id="msmstextarea" layoutX="9.0" layoutY="274.0" prefHeight="154.0" prefWidth="628.0" />
+                              <CheckBox id="checkboxmsmslargest" layoutX="447.0" layoutY="244.0" mnemonicParsing="false" selected="true" text="Largest peaks only" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab text="Reference data">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TextField id="targetnonpolar" layoutX="322.0" layoutY="3.0" text="0" />
+                              <Label layoutX="6.0" layoutY="7.0" text="RI of the unknown (non-polar stationary phase):" />
+                              <Label layoutX="6.0" layoutY="35.0" text="RI of the unknown (polar stationary phase):" />
+                              <TextField id="targetpolar" layoutX="322.0" layoutY="31.0" text="0" />
+                              <Label layoutX="6.0" layoutY="63.0" text="Mass spectrum of the unknown (txt):" />
+                              <TextField id="filespectrum" layoutX="6.0" layoutY="87.0" prefHeight="24.0" prefWidth="486.0" />
+                              <Button id="button2" layoutX="322.0" layoutY="59.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="171.0" text="Open..." />
+                              <TextField id="targetmw" layoutX="322.0" layoutY="115.0" text="0" />
+                              <Label layoutX="6.0" layoutY="119.0" text="Molecular weight of the unknown:" />
+                              <Button id="loadbutton" layoutX="8.0" layoutY="145.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="485.0" text="Load the mass spectrum of the unknown" />
+                              <TextArea id="textareaspectrum" layoutX="6.0" layoutY="177.0" prefHeight="200.0" prefWidth="488.0" promptText="Paste your spectrum here...">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </TextArea>
+                              <Button id="usepastebutton" layoutX="6.0" layoutY="384.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="485.0" text="Use the specified mass spectrum of the unknown" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+               </tabs>
+            </TabPane>
+         </content>
+      </ScrollPane>
+  </children>
+</VBox>
