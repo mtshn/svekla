@@ -1,0 +1,86 @@
+Instructions how the releases were done.
+
+
+1) Compiling and downloading CFM binaries and model
+
+CFM binaries for Linux was built the following way:
+On clean Linux Mint 18 (due to use of very old libraries the version conflicts can be expected):
+
+sudo apt-get install  g++  cmake subversion 
+sudo apt-get remove bison flex
+
+Then source code of required versions of RDKit, Boost and lpsolve were downloaded. The following files should be downloaded (from corresponding Source Forge project sites) and placed together:
+RDKit_2013_09_1.tgz
+boost_1_55_0.tar.gz
+lp_solve_5.5.2.11_source.tar.gz
+
+then the following commands (in the folder where archives are located) will compile RDKit and CFM (note that INCHI binaries were moved and we should to correct corresponding script):
+
+sudo apt-get install  g++  cmake subversion 
+sudo apt-get remove bison flex
+export d1=$(pwd)
+echo $d1
+tar -zxvf boost_1_55_0.tar.gz
+cd boost_1_55_0
+./bootstrap.sh --prefix=. --with-libraries=regex,serialization,filesystem,system
+./b2 address-model=64 cflags=-fPIC cxxflags=-fPIC install
+export BOOST_ROOT=$d1/boost_1_55_0
+cd ..
+tar -zxvf RDKit_2013_09_1.tgz
+cd RDKit_2013_09_1/External/INCHI-API
+sed -i -e 's/http:\/\/www.inchi-trust.org\/sites\/default\/files\/inchi-1.04\/INCHI-1-API.ZIP/https:\/\/old.iupac.org\/inchi\/download\/version1.03\/INCHI-1-API.zip/g' download-inchi.sh
+bash ./download-inchi.sh
+cd ../..
+mkdir build
+cd build
+cmake .. -DRDK_BUILD_PYTHON_WRAPPERS=OFF -DRDK_BUILD_INCHI_SUPPORT=ON -DBOOST_ROOT=$d1/boost_1_55_0 -DBoost_NO_SYSTEM_PATHS=ON
+make -j8 install
+export RDBASE=$d1/RDKit_2013_09_1
+cd ../..
+tar -zxvf lp_solve_5.5.2.11_source.tar.gz
+cd lp_solve_5.5/lpsolve55
+bash ./ccc
+cd ../..
+svn checkout -r 30 svn://svn.code.sf.net/p/cfm-id/code/cfm cfm
+cd cfm
+mkdir build
+cd build
+cmake .. -DLPSOLVE_INCLUDE_DIR=$d1/lp_solve_5.5 -DLPSOLVE_LIBRARY_DIR=$d1/lp_solve_5.5/lpsolve55/bin/ux64
+make install
+
+The produced cfm-predict file is included to final release. Several other files produced using this commands are located in the rdkit folder of the final release. CFM binaries for windows and spectra prediction models were downloaded from Source Forge website:
+https://sourceforge.net/projects/cfm-id/
+The following files from this project were included to the release:
+cfm-predict.exe 
+ISOTOPE.DAT
+Model for electron ionization spectra (param_config.txt, param_output.log)
+Models for MS2 spectra (located in the models_msms folder)
+
+Also for windows 32-bit version of lpsolve55.dll is required. This file can be extracted from lp_solve_5.5.2.11_dev_win32.zip archive downloaded from lpsolve Source Forge project.
+
+2) Downloading and preparing RI prediction models
+Source code and models were downloaded here and the corresponding instructions were followed:
+https://doi.org/10.6084/m9.figshare.14602317
+https://doi.org/10.6084/m9.figshare.12651680
+
+The resulting folders models and models_polar were included to the final release.
+
+3) Download JSME.  The unpacked files are including to the final release
+https://github.com/jsme-editor/jsme-editor.github.io/blob/main/downloads/JSME_2022-09-26.zip
+
+4) Compile the project (JDK and MAVEN should be installed):
+For linux:
+mvn clean package -Djavacpp.platform=linux-x86_64
+Fon windows
+mvn clean package -Djavacpp.platform=windows-x86_64
+
+The jar file for Linux created this way can be immideately used. For windows the following step is required. Download XGBoost for windows. Download this archive
+https://github.com/criteo-forks/xgboost-jars/releases/download/1.1.0-criteo-20200812-071ef500/xgboost4j_2.11-1.1.0-criteo-20200812-071ef500-win64.jar
+Extract xgboost4j.dll and manually put it into lib folder inside svekla-0.0.2-jar-with-dependencies.jar file.
+
+5) Download and extract portable jre for windows.
+https://jdk.java.net/16/
+https://download.java.net/java/GA/jdk16.0.2/d4a915d82b4c4fbb9bde534da945d746/7/GPL/openjdk-16.0.2_windows-x64_bin.zip
+
+
+6) 32-bit and 64-bit modern and 2010 Microsoft Visual C++ redistributable packages are required.
