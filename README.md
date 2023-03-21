@@ -1,8 +1,9 @@
 Software for predicting gas chromatographic retention indices and mass spectra.\
-Windows: download and unpack release from this site, run install.bat (it will install Microsoft Visual C++ redistributable packages), then run svekla.bat\
-Probably (if you have installed many other software before) the svekla.bat will work even without installation. Java is bundled to release!\
-Linux: download and unpack release, run "svekla.sh". Writing to disk should be permitted. Java must be installed
-(sudo apt-get install default-jdk)\ 
+**Download here:** https://github.com/mtshn/svekla/releases  \
+**Windows:** download and unpack release from this site, run **install.bat** (it will install Microsoft Visual C++ redistributable packages), then run **svekla.bat**\
+Probably (if you have installed many other software before) the **svekla.bat** will work even without installation. Java is bundled to release!\
+**Linux:** download and unpack release, run "svekla.sh". Writing to disk should be permitted. Java must be installed
+(sudo apt-get install default-jdk)
 
 
 CFM-ID, version 2.4 (https://sourceforge.net/projects/cfm-id/) is used for mass spectra. Models published at the links below are used for retention indices: \
