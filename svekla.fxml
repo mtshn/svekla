@@ -159,6 +159,43 @@
                         </AnchorPane>
                      </content>
                   </Tab>
+                  <Tab text="List of isomers">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Button id="b_from_pubchem" layoutX="249.0" layoutY="33.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="147.0" text="From PubChem" />
+                              <TextField id="tf_molecular_formula_input" layoutX="14.0" layoutY="33.0" prefHeight="24.0" prefWidth="218.0" />
+                              <Label layoutX="14.0" layoutY="14.0" text="Molecular formula (e.g. C8H8O3):" />
+                              <Button id="b_from_surge" layoutX="406.0" layoutY="33.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="147.0" text="From Surge" />
+                              <Label layoutX="1042.0" layoutY="14.0" text="Surge params:" />
+                              <TextField id="tf_surge_params" editable="false" layoutX="1042.0" layoutY="33.0" prefHeight="24.0" prefWidth="218.0" />
+                              <CheckBox id="cb_no_triple" layoutX="1042.0" layoutY="67.0" mnemonicParsing="false" text="No triple bonds" />
+                              <CheckBox id="cb_no_small_rings" layoutX="1042.0" layoutY="94.0" mnemonicParsing="false" text="No small rings" />
+                              <CheckBox id="cb_no_x_x_x" layoutX="1042.0" layoutY="121.0" mnemonicParsing="false" text="No X=X=X fragments" />
+                              <CheckBox id="cb_custom_surge" layoutX="1042.0" layoutY="146.0" mnemonicParsing="false" text="Custom params (select to edit manually)">
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </CheckBox>
+                              <TextArea id="ta_output" layoutX="14.0" layoutY="62.0" prefHeight="786.0" prefWidth="539.0" />
+                              <Button id="b_predict_ri" layoutX="562.0" layoutY="33.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="188.0" text="Predict retention indices" />
+                              <Button id="b_filter_ri" layoutX="562.0" layoutY="64.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="188.0" text="Filter using retention" />
+                              <Label layoutX="564.0" layoutY="162.0" text="Non-polar threshold:" />
+                              <TextField id="tf_non_polar_threshold" layoutX="564.0" layoutY="178.0" prefHeight="24.0" prefWidth="126.0" text="70" />
+                              <Label layoutX="705.0" layoutY="162.0" text="Polar threshold:" />
+                              <TextField id="tf_polar_threshold" layoutX="705.0" layoutY="178.0" prefHeight="24.0" prefWidth="126.0" text="100" />
+                              <Button id="b_sort_fp" layoutX="562.0" layoutY="95.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="188.0" text="Smart sort" />
+                              <Label layoutX="562.0" layoutY="122.0" text="For smart sort experimenal mass spectrum is required" />
+                              <Label layoutX="562.0" layoutY="140.0" text="Mass spectrum --&gt; molecular fingerprints" />
+                              <Button id="b_sort_ri" layoutX="765.0" layoutY="33.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="188.0" text="Retention index sort" />
+                              <Label layoutX="765.0" layoutY="59.0" text="Weight of RI for polar stationary phase" />
+                              <TextField id="tf_weight_wax" layoutX="759.0" layoutY="91.0" prefHeight="24.0" prefWidth="126.0" text="0.5" />
+                              <Label layoutX="765.0" layoutY="73.0" text="relative to non-polar" />
+                              <Label layoutX="561.0" layoutY="233.0" prefHeight="159.0" prefWidth="757.0" text="Smart sorting works as follows. Based on the mass spectrum (entered in the Reference data tab), a molecular fingerprint of ECFP6 of length 1024 is predicted. This is done using a multilayer (5 layers) perceptron. The result is a vector of floats corresponding to the probabilities that the bits are equal to 1. Next, the average (over 1024 bits) binary crossentropy is calculated for each of the candidate structures. Sorting is performed based on it. 10000 structures are retained." wrapText="true" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
                </tabs>
             </TabPane>
          </content>

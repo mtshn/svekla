@@ -146,6 +146,20 @@ public class RIPrediction {
 		return molForm;
 	}
 
+	public float[] predictNonpolarPolar(String smiles) {
+		try {
+			String canonicalSmiles = Chemoinformatics.canonical(smiles, false);
+			int column = 15;
+			float stackingIndex = model.predictRI(canonicalSmiles, column);
+			float sveklaCNNPolar = modelsSvekla[1].predictRI(canonicalSmiles, column);
+			float sveklaMLPPolar = modelsSvekla[3].predictRI(canonicalSmiles, column);
+			float polar = (float) (0.5 * sveklaMLPPolar + 0.5 * sveklaCNNPolar);
+			return new float[] { stackingIndex, polar };
+		} catch (CDKException e) {
+			return new float[] { 0, 0 };
+		}
+	}
+
 	public void predictAndWrite(String smiles, TextField accessResults, TextField nonpolarResult,
 			TextField sveklaResults, TextField polarResult, TextField nonpolarDev, TextField polarDev,
 			TextField nonpolarTarget, TextField polarTarget, TextField molecularFormula) {

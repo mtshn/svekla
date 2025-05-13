@@ -1,24 +1,19 @@
 package ru.ac.phyche.gcms.svekla.javafxgui;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import ru.ac.phyche.gcms.ei2fp_java.Inference.ModelFP;
 
 public class MSpectra {
 	private static final float THRESHOLD = 2.0f;
@@ -34,6 +29,8 @@ public class MSpectra {
 		int pixel = (int) (16 + p * (width - 34));
 		return pixel;
 	}
+
+	private static final ModelFP modelFP = new ModelFP();
 
 	public static void displaySpectrumOnCanvas(Canvas canvas, SpectrumMS spectrum, int minMZ, int maxMZ,
 			SpectrumMS spectrumForComparison, boolean squareRoot, boolean markAllPeaks, String caption) {
@@ -289,7 +286,7 @@ public class MSpectra {
 
 			result.minMZ = minmz;
 			result.maxMZ = maxmz;
-			 Files.deleteIfExists(Paths.get("./cfm.sh"));
+			Files.deleteIfExists(Paths.get("./cfm.sh"));
 			return result;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -299,4 +296,24 @@ public class MSpectra {
 			return result;
 		}
 	}
+
+	public static float[] fingerprintsFromSpectrum(SpectrumMS s) {
+		if (!modelFP.loaded()) {
+			try {
+				modelFP.loadFromFolder("./fingerprints_model");
+			} catch (IOException e) {
+				e.printStackTrace();
+				throw new RuntimeException(e.getMessage() + " ERROR LOADING EI FP MODEL");
+			}
+		}
+		float[] spectrum = new float[ModelFP.SPECTRUM_LENGTH];
+		for (int i = 0; i < spectrum.length; i++) {
+			if (i <= s.maxMZ) {
+				spectrum[i] = s.intensities[i]/1000;
+			}
+		}
+		float[] result = modelFP.predict(spectrum);
+		return result;
+	}
+
 }
